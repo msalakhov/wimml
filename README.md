@@ -1,0 +1,3 @@
+# WIMML
+
+Spendings scheduler
