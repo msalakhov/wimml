@@ -1,0 +1,28 @@
+api_platform:
+    version: 1.0.0
+    enable_swagger: false
+    enable_swagger_ui: false
+    enable_re_doc: false
+    enable_docs: false
+    enable_entrypoint: false
+    graphql:
+        graphiql:
+            enabled: false
+        graphql_playground:
+            enabled: true
+        introspection: true
+    formats:
+        graphql: ['application/graphql']
+        jsonld: ['application/ld+json']
+        html: ['text/html']
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
+        extra_properties:
+            standard_put: true
+            rfc_7807_compliant_errors: true
+    keep_legacy_inflector: false
+    use_symfony_listeners: true
+    mapping:
+        paths: [ '%kernel.project_dir%/src/Entity' ]
