@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
 
 #[ApiResource(graphQlOperations: [
     new Query(),
@@ -19,6 +20,7 @@ use Doctrine\ORM\Mapping\Id;
     new Mutation(name: 'create')
 ])]
 #[Entity]
+#[Table(name: 'expenses')]
 class Expense
 {
     #[Id]
@@ -28,6 +30,9 @@ class Expense
 
     #[Column(type: 'string')]
     private string $name;
+
+    #[Column(type: 'string', length: 255, nullable: true)]
+    private ?string $description;
 
     #[Column(type: 'datetime_immutable')]
     private DateTimeImmutable $implementationDate;
@@ -43,7 +48,6 @@ class Expense
     public function setId(?string $id): self
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -55,8 +59,17 @@ class Expense
     public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getImplementationDate(): DateTimeImmutable
@@ -67,7 +80,6 @@ class Expense
     public function setImplementationDate(DateTimeImmutable $implementationDate): self
     {
         $this->implementationDate = $implementationDate;
-
         return $this;
     }
 
@@ -79,7 +91,6 @@ class Expense
     public function setAmount(string $amount): self
     {
         $this->amount = $amount;
-
         return $this;
     }
 }

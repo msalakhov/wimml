@@ -10,5 +10,13 @@ composer-install:
 database-create:
 	$(DOCKER_COMPOSE) exec php-cli php bin/console doctrine:database:create --no-interaction
 
+database-drop:
+	$(DOCKER_COMPOSE) exec php-cli php bin/console doctrine:database:drop --if-exists --force --no-interaction
+
+database-refresh: database-drop database-create
+
 migration-migrate:
 	$(DOCKER_COMPOSE) exec php-cli php bin/console doctrine:migration:migrate --no-interaction
+
+migration-create:
+	$(DOCKER_COMPOSE) exec php-cli php bin/console make:migration
